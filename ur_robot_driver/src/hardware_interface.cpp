@@ -382,6 +382,7 @@ URPositionHardwareInterface::on_activate(const rclcpp_lifecycle::State& previous
         std::bind(&URPositionHardwareInterface::handleRobotProgramState, this, std::placeholders::_1), headless_mode,
         std::move(tool_comm_setup), (uint32_t)reverse_port, (uint32_t)script_sender_port, servoj_gain,
         servoj_lookahead_time, non_blocking_read_);
+    ur_driver_->setKeepaliveCount(10);
   } catch (urcl::ToolCommNotAvailable& e) {
     RCLCPP_FATAL_STREAM(rclcpp::get_logger("URPositionHardwareInterface"), "See parameter use_tool_communication");
 
